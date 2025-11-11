@@ -24,13 +24,13 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden items-center gap-6 sm:flex">
                                 <NavLink
-                                    href={route('admin.dashboard')}
+                                    href={route('admin.dashboard', undefined, false)}
                                     active={route().current('admin.dashboard')}
                                 >
                                     داشبورد
                                 </NavLink>
                                 <NavLink
-                                    href={route('admin.menu.index')}
+                                    href={route('admin.menu.index', undefined, false)}
                                     active={route().current('admin.menu.index')}
                                 >
                                     مدیریت منو
@@ -60,10 +60,10 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>
+                                        <Dropdown.Link href={route('profile.edit', undefined, false)}>
                                             پروفایل
                                         </Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                        <Dropdown.Link href={route('logout', undefined, false)} method="post" as="button">
                                             خروج
                                         </Dropdown.Link>
                                     </Dropdown.Content>
@@ -100,13 +100,13 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            href={route('admin.dashboard')}
+                            href={route('admin.dashboard', undefined, false)}
                             active={route().current('admin.dashboard')}
                         >
                             داشبورد
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href={route('admin.menu.index')}
+                            href={route('admin.menu.index', undefined, false)}
                             active={route().current('admin.menu.index')}
                         >
                             مدیریت منو
@@ -120,10 +120,10 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
+                            <ResponsiveNavLink href={route('profile.edit', undefined, false)}>
                                 پروفایل
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                            <ResponsiveNavLink method="post" href={route('logout', undefined, false)} as="button">
                                 خروج
                             </ResponsiveNavLink>
                         </div>

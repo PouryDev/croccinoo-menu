@@ -93,7 +93,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
 
     const handleCreateCategory = (event) => {
         event.preventDefault();
-        categoryForm.post(route('admin.categories.store'), {
+        categoryForm.post(route('admin.categories.store', undefined, false), {
             preserveScroll: true,
             onSuccess: () => {
                 categoryForm.reset();
@@ -105,7 +105,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
         event.preventDefault();
         if (!editingCategory) return;
 
-        categoryEditForm.put(route('admin.categories.update', editingCategory.id), {
+        categoryEditForm.put(route('admin.categories.update', editingCategory.id, false), {
             preserveScroll: true,
             onSuccess: () => {
                 setEditingCategory(null);
@@ -123,7 +123,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
             .filter(Boolean);
 
         itemForm.setData('tags', tags);
-        itemForm.post(route('admin.items.store', selectedCategory.id), {
+        itemForm.post(route('admin.items.store', selectedCategory.id, false), {
             preserveScroll: true,
             onSuccess: () => {
                 itemForm.reset();
@@ -142,7 +142,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
             .filter(Boolean);
 
         itemEditForm.setData('tags', tags);
-        itemEditForm.put(route('admin.items.update', editingItem.id), {
+        itemEditForm.put(route('admin.items.update', editingItem.id, false), {
             preserveScroll: true,
             onSuccess: () => {
                 setEditingItem(null);
@@ -152,7 +152,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
     };
 
     const toggleAvailability = (item) => {
-        router.patch(route('admin.items.toggle', item.id), undefined, {
+        router.patch(route('admin.items.toggle', item.id, false), undefined, {
             preserveScroll: true,
         });
     };
@@ -163,7 +163,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
                 `حذف "${category.name}" تمام آیتم‌های مرتبط را هم حذف می‌کند. آیا مطمئن هستید؟`,
             )
         ) {
-            router.delete(route('admin.categories.destroy', category.id), {
+            router.delete(route('admin.categories.destroy', category.id, false), {
                 preserveScroll: true,
                 onSuccess: () => {
                     if (selectedCategoryId === category.id) {
@@ -176,7 +176,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
 
     const deleteItem = (item) => {
         if (confirm(`"${item.name}" حذف شود؟`)) {
-            router.delete(route('admin.items.destroy', item.id), {
+            router.delete(route('admin.items.destroy', item.id, false), {
                 preserveScroll: true,
             });
         }
