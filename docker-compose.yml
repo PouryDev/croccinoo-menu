@@ -13,7 +13,9 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-production}
       APP_DEBUG: ${APP_DEBUG:-false}
-      APP_URL: ${APP_URL:-http://localhost:8080}
+      APP_URL: ${APP_URL:-https://croccinoo.ir}
+      ASSET_URL: ${ASSET_URL:-https://croccinoo.ir}
+      APP_NAME: ${APP_NAME:-کروچینو}
       DB_CONNECTION: mysql
       DB_HOST: mariadb
       DB_PORT: 3306
