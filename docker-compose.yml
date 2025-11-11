@@ -1,12 +1,11 @@
 version: "3.9"
 
 services:
-  app:
+  php:
     build:
       context: .
       dockerfile: Dockerfile
-    image: croccinoo-app:latest
-    container_name: croccinoo_app
+    image: croccinoo-php:prod
     restart: unless-stopped
     env_file:
       - .env.docker
@@ -14,74 +13,82 @@ services:
       APP_ENV: ${APP_ENV:-production}
       APP_DEBUG: ${APP_DEBUG:-false}
       APP_URL: ${APP_URL:-https://croccinoo.ir}
-      ASSET_URL: ${ASSET_URL:-https://croccinoo.ir}
-      APP_NAME: ${APP_NAME:-کروچینو}
+      APP_KEY: ${APP_KEY:-}
       DB_CONNECTION: mysql
-      DB_HOST: mariadb
+      DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: ${DB_DATABASE:-croccinoo}
       DB_USERNAME: ${DB_USERNAME:-croccinoo}
       DB_PASSWORD: ${DB_PASSWORD:-secret}
-    depends_on:
-      - mariadb
+      LOG_CHANNEL: daily
+      SESSION_DRIVER: file
+      CACHE_DRIVER: file
     volumes:
-      - croccinoo_app_code:/var/www/croccinoo-menu
-      - ${HOST_CODE_PATH:-/var/www/croccinoo-menu}:/mnt/host_code:ro
-      - croccinoo_storage:/var/www/croccinoo-menu/storage
-      - croccinoo_bootstrap:/var/www/croccinoo-menu/bootstrap/cache
-    command: >
-      sh -c "
-        if [ -d /mnt/host_code ]; then
-          cp -a /mnt/host_code/. /var/www/croccinoo-menu/
-        fi &&
-        if [ ! -d /var/www/croccinoo-menu/vendor ]; then
-          composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction --no-progress;
-        fi &&
-        php-fpm
-      "
-    networks:
-      - croccinoo_net
+      - ./:/var/www/html:rw
+      - storage_data:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
 
   nginx:
     image: nginx:1.27-alpine
-    container_name: croccinoo_nginx
     restart: unless-stopped
     ports:
       - "8080:80"
-    depends_on:
-      - app
     volumes:
-      - croccinoo_app_code:/var/www/croccinoo-menu:ro
-      - croccinoo_storage:/var/www/croccinoo-menu/storage
-      - croccinoo_bootstrap:/var/www/croccinoo-menu/bootstrap/cache
-      - ${HOST_CODE_PATH:-/var/www/croccinoo-menu}/docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - croccinoo_net
+      - ./:/var/www/html:ro
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - storage_data:/var/www/html/storage
+    depends_on:
+      - php
 
-  mariadb:
+  db:
     image: mariadb:11.4
-    container_name: croccinoo_db
     restart: unless-stopped
-    ports:
-      - "3307:3306"
-    env_file:
-      - .env.docker
     environment:
       MARIADB_DATABASE: ${DB_DATABASE:-croccinoo}
       MARIADB_USER: ${DB_USERNAME:-croccinoo}
       MARIADB_PASSWORD: ${DB_PASSWORD:-secret}
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-supersecret}
+      MARIADB_AUTO_UPGRADE: 1
+    command:
+      [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--bind-address=0.0.0.0",
+        "--skip-name-resolve",
+      ]
     volumes:
-      - croccinoo_db_data:/var/lib/mysql
-    networks:
-      - croccinoo_net
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      timeout: 20s
+      retries: 10
 
-networks:
-  croccinoo_net:
-    driver: bridge
+  backup:
+    image: alpine:3.20
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    environment:
+      DB_HOST: db
+      DB_DATABASE: ${DB_DATABASE:-croccinoo}
+      DB_USERNAME: ${DB_USERNAME:-croccinoo}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      BACKUP_PATH: /backups
+    volumes:
+      - ./docker/backup/backup.sh:/backup.sh:ro
+      - db_backups:/backups
+    entrypoint:
+      [
+        "/bin/sh",
+        "-c",
+        "crond -f -l 8 & echo '0 3 * * * /backup.sh' > /etc/crontabs/root && tail -f /dev/null",
+      ]
+    depends_on:
+      - db
 
 volumes:
-  croccinoo_app_code:
-  croccinoo_storage:
-  croccinoo_bootstrap:
-  croccinoo_db_data:
+  db_data:
+  storage_data:
+  db_backups:

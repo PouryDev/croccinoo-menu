@@ -1,45 +1,65 @@
-FROM node:20-alpine AS frontend
+FROM php:8.3-fpm-alpine AS base
 
-WORKDIR /app
+# Retry-aware package installation for reliability
+RUN set -eux; \
+    (apk update --no-cache || (sleep 10 && apk update --no-cache) || (sleep 20 && apk update --no-cache)) \
+    && apk add --no-cache ca-certificates \
+    && update-ca-certificates
 
-COPY package.json pnpm-lock.yaml ./
-
-RUN corepack enable && npm install -g pnpm@8.15.4
-
-FROM php:8.3-fpm AS php-base
-
-ARG WORKDIR=/var/www/html
-
-WORKDIR ${WORKDIR}
-
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    gnupg \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libpq-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
+RUN set -eux; \
+    (apk add --no-cache --update bash icu-dev oniguruma-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev curl git || \
+    (sleep 10 && apk add --no-cache --update bash icu-dev oniguruma-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev curl git) || \
+    (sleep 20 && apk add --no-cache --update bash icu-dev oniguruma-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev curl git)) \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql pdo_pgsql zip gd mbstring exif pcntl bcmath \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install -j$(nproc) pdo pdo_mysql intl mbstring zip gd bcmath \
+    && (apk add --no-cache libpng freetype libjpeg-turbo icu-libs oniguruma libzip || \
+    (sleep 10 && apk add --no-cache libpng freetype libjpeg-turbo icu-libs oniguruma libzip) || \
+    (sleep 20 && apk add --no-cache libpng freetype libjpeg-turbo icu-libs oniguruma libzip)) \
+    && apk del --no-network freetype-dev libjpeg-turbo-dev libpng-dev icu-dev oniguruma-dev libzip-dev
 
-COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
+# Node for building frontend assets
+RUN set -eux; \
+    ((apk update --no-cache && apk add --no-cache nodejs npm) || \
+    (sleep 10 && apk update --no-cache && apk add --no-cache nodejs npm) || \
+    (sleep 20 && apk update --no-cache && apk add --no-cache nodejs npm))
 
-COPY composer.json composer.lock ./
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction --no-progress --no-scripts
+WORKDIR /var/www/html
 
-COPY . .
+# Copy project (bind-mounted in compose, but keep for image-only runs)
+COPY . /var/www/html
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Ensure runtime directories exist and have proper permissions
+RUN set -eux; \
+    mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
+# Entrypoint
+COPY docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Provide default .env for image-only usage
+RUN echo "APP_NAME=\"کروچینو\"" > .env && \
+    echo "APP_ENV=production" >> .env && \
+    echo "APP_KEY=" >> .env && \
+    echo "APP_DEBUG=false" >> .env && \
+    echo "APP_URL=https://croccinoo.ir" >> .env && \
+    echo "" >> .env && \
+    echo "DB_CONNECTION=mysql" >> .env && \
+    echo "DB_HOST=db" >> .env && \
+    echo "DB_PORT=3306" >> .env && \
+    echo "DB_DATABASE=croccinoo" >> .env && \
+    echo "DB_USERNAME=croccinoo" >> .env && \
+    echo "DB_PASSWORD=secret" >> .env && \
+    echo "LOG_CHANNEL=daily" >> .env && \
+    php artisan key:generate --no-interaction
+
+EXPOSE 9000
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
 

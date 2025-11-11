@@ -15,129 +15,363 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        $menu = [
-            [
-                'name' => 'کروسان‌های امضایی',
-                'description' => 'لایه‌های کره‌ای و ترد که هر صبح در کارگاه کروچینو با کره‌ی فرانسوی و پرکننده‌های فصلی آماده می‌شوند.',
-                'hero_image_url' => 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80',
-                'items' => [
-                    [
-                        'name' => 'کروسان بادام پاریسی',
-                        'subtitle' => 'کرم بادام برشته، پوست مرکبات کاراملی',
-                        'description' => 'کروسان دولایه با کرم بادام خانگی، پوشیده از شکر کاراملی و پودر پسته.',
-                        'price' => 235_000,
-                        'tags' => ['کروسان', 'شیرین', 'پرفروش'],
-                        'is_featured' => true,
-                        'image_url' => 'https://images.unsplash.com/photo-1542838686-73e7d57c09b6?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'کروسان ترافل و قارچ',
-                        'subtitle' => 'کرم قارچ جنگلی، لایه پنیر تالجو',
-                        'description' => 'طعم لذیذ قارچ‌های کنفی و کرم ترافل سیاه در دل یک کروسان کره‌ای.',
-                        'price' => 265_000,
-                        'tags' => ['کروسان', 'شور', 'برانچ'],
-                        'image_url' => 'https://images.unsplash.com/photo-1589308078055-6f1c684e3391?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'پیچ پسته طلایی',
-                        'subtitle' => 'کرم پسته، گلیز گلاب',
-                        'description' => 'کروسان پیچ‌خورده با مغز کرم پسته و گلیز گلاب، تزئین شده با پسته برشته.',
-                        'price' => 248_000,
-                        'tags' => ['کروسان', 'فصلی', 'خاص'],
-                        'image_url' => 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                ],
-            ],
-            [
-                'name' => 'آتلـیه کاپوچینو',
-                'description' => 'اسپرسو تک‌خاستگاه و فوم مخملی شیر که با امضاهای کروچینو ترکیب شده‌اند.',
-                'hero_image_url' => 'https://images.unsplash.com/photo-1507914372361-74c1bb9afb0c?auto=format&fit=crop&w=1600&q=80',
-                'items' => [
-                    [
-                        'name' => 'کاپوچینوی کروچینو',
-                        'subtitle' => 'بلند اختصاصی کروچینو، فوم مخملی',
-                        'description' => 'اسپرسو کاراملی با فوم ابری و پودر وانیل‌کارامل؛ امضای کافه.',
-                        'price' => 145_000,
-                        'tags' => ['قهوه', 'گرم', 'کلاسیک'],
-                        'is_featured' => true,
-                        'image_url' => 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'کاپوچینوی مخمل کاکائو',
-                        'subtitle' => 'کاکائو تک‌خاستگاه، نمک دودی',
-                        'description' => 'کاکائو تلخ با فوم دودی و کرم نمک؛ تجربه‌ای شکلاتی و متفاوت.',
-                        'price' => 158_000,
-                        'tags' => ['قهوه', 'شکلاتی', 'ویژه'],
-                        'image_url' => 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'کولد فوم افرا',
-                        'subtitle' => 'کولد برو، فوم خامه افرا',
-                        'description' => 'کولد برو ۲۴ ساعته با فوم خامه افرا و عطر دارچین دودی.',
-                        'price' => 162_000,
-                        'tags' => ['قهوه', 'سرد'],
-                        'is_available' => true,
-                        'image_url' => 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                ],
-            ],
-            [
-                'name' => 'برانچ‌های کروچینو',
-                'description' => 'چاشت‌های طولانی با نان‌های کره‌ای، مزه‌های محلی و محصولات فصلی باغ.',
-                'hero_image_url' => 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80',
-                'items' => [
-                    [
-                        'name' => 'پلیت پیک‌نیک نیمروز',
-                        'subtitle' => 'کروسان مینی، لبنه پنیری، سبزیجات پیکل',
-                        'description' => 'پلیت اشتراکی با کروسان‌های مینی، لبنه سبزیجات، انگور ترش و عسل دوددیده.',
-                        'price' => 320_000,
-                        'tags' => ['برانچ', 'اشتراکی'],
-                        'image_url' => 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'شاکشوکا گوجه آفتاب‌خشک',
-                        'subtitle' => 'لبنه سبزیجات، کروسان استیک',
-                        'description' => 'گوجه آفتاب‌خشک با فلفل کبابی و تخم‌مرغ نرم، سرو شده با استیک‌های کروسان.',
-                        'price' => 298_000,
-                        'tags' => ['برانچ', 'شور', 'امضایی'],
-                        'image_url' => 'https://images.unsplash.com/photo-1505575967455-40e256f73376?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                    [
-                        'name' => 'پارفه عسل کهربایی',
-                        'subtitle' => 'ماست یونانی، گرانولا، کرامبل کروسان',
-                        'description' => 'ماست وانیلی با گرانولای بادام برشته و کرامبل کروسان، مزین به عسل زعفرانی.',
-                        'price' => 210_000,
-                        'tags' => ['برانچ', 'شیرین'],
-                        'image_url' => 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80',
-                    ],
-                ],
-            ],
-        ];
+        $firstMenuJson = <<<'JSON'
+{
+  "menu": {
+    "Breakfast": [
+      {
+        "name": "نیمرو",
+        "description": "تخم مرغ تازه، نان تست یا نان سنتی",
+        "price": 115000
+      },
+      {
+        "name": "سوسیس و تخم مرغ",
+        "description": "تخم مرغ و سوسیس گریل شده، نان تست یا نان سنتی",
+        "price": 169000
+      },
+      {
+        "name": "بیکن و تخم مرغ",
+        "description": "تخم مرغ نیم‌پز، بیکن، نان تست یا نان سنتی",
+        "price": 199000
+      },
+      {
+        "name": "املت اسفناج",
+        "description": "تخم مرغ، اسفناج تازه، سیر، پیاز، نان تست یا نان سنتی",
+        "price": 199000
+      },
+      {
+        "name": "املت کروچینو",
+        "description": "تخم مرغ، بیکن، قارچ، فلفل دلمه، پنیر چدار، نان تست یا نان سنتی",
+        "price": 259000
+      },
+      {
+        "name": "املت سوسیس و دیوی",
+        "description": "تخم مرغ، سوسیس مخصوص، قارچ، پیاز، نان تست یا نان سنتی",
+        "price": 259000
+      },
+      {
+        "name": "املت ایرانی",
+        "description": "تخم مرغ، گوجه، پیاز، فلفل، نان سنتی",
+        "price": 179000
+      },
+      {
+        "name": "املت زیتون",
+        "description": "تخم مرغ، زیتون سبز و سیاه، فلفل دلمه، پیاز، نان تست یا نان سنتی",
+        "price": 199000
+      },
+      {
+        "name": "صبحانه انگلیسی",
+        "description": "تخم مرغ نیم‌پز، سوسیس، بیکن، لوبیا چیتی، قارچ، گوجه کبابی، نان تست",
+        "price": 339000
+      },
+      {
+        "name": "صبحانه پادشاهان کروچینو",
+        "description": "املت کروچینو با بیکن دوبل، سوسیس، سیب‌زمینی، نان تست",
+        "price": 289000
+      },
+      {
+        "name": "تست نوتلا و موز",
+        "description": "نان تست، نوتلا، برش‌های موز تازه",
+        "price": 215000
+      }
+    ],
+    "Dessert": [
+      { "name": "چیزکیک سن سباستین", "price": 189000 },
+      { "name": "کیک سیب", "price": 159000 },
+      { "name": "کیک شکلات", "price": 139000 },
+      { "name": "کروسان (شکلات - پینات)", "price": 129000 },
+      { "name": "کوکی", "price": 69000 }
+    ],
+    "Drink": [
+      { "name": "خیار‌سکنجبین", "price": 189000 },
+      { "name": "موهیتو", "price": 181000 },
+      { "name": "نوتلا میلک‌شیک", "price": 215000 },
+      { "name": "لیموناد", "price": 181000 },
+      { "name": "بلو کوراسائو", "price": 199000 },
+      { "name": "انبه", "price": 215000 },
+      { "name": "پیناکولادا", "price": 181000 },
+      { "name": "میکس‌بری", "price": 181000 },
+      { "name": "آب پرتقال طبیعی", "price": 211000 },
+      { "name": "آب سیب", "price": 117000 },
+      { "name": "سودا", "price": 43100 }
+    ],
+    "Herbal Tea": [
+      { "name": "چای سیاه", "description": "چای اصیل ایرانی با عطر طبیعی برگ چای", "price": 139000 },
+      { "name": "چای ماسالا", "description": "چای سیاه، شیر، دارچین، هل، زنجبیل، شکر قهوه‌ای", "price": 169000 },
+      { "name": "چای سبز", "description": "چای سبز ایرانی، لیمو، عسل", "price": 121000 },
+      { "name": "چای ترش", "description": "گل‌چای ترش با عسل و لیمو", "price": 159000 },
+      { "name": "چای زنجبیل دارچین", "description": "زنجبیل تازه، چوب دارچین، عسل", "price": 117000 },
+      { "name": "چای بابونه", "description": "بابونه خشک، گل گاوزبان، عسل", "price": 111000 },
+      { "name": "چای زعفران", "description": "چای سیاه ایرانی دم شده با زعفران", "price": 139000 },
+      { "name": "چای سیب و دارچین", "description": "تکه‌های سیب تازه، دارچین، عسل", "price": 149000 },
+      { "name": "چای به‌لیمو", "description": "گیاه به‌لیمو خشک‌شده، عسل", "price": 159000 },
+      { "name": "دمنوش سرد دوغ و نعناع", "price": 169000 }
+    ],
+    "Coffee": [
+      { "name": "اسپرسو سینگل", "price": 65000 },
+      { "name": "اسپرسو دبل", "price": 80000 },
+      { "name": "کاپوچینو", "price": 125000 },
+      { "name": "کارامل ماکیاتو", "price": 139000 },
+      { "name": "آمریکانو (دبل)", "price": 129000 },
+      { "name": "کافه لاته", "price": 145000 },
+      { "name": "موکا", "price": 155000 },
+      { "name": "آفوگاتو", "price": 149000 }
+    ],
+    "Ice Coffee": [
+      { "name": "آیس کارامل ماکیاتو", "price": 139000 },
+      { "name": "آیس لاته", "price": 129000 },
+      { "name": "آیس آمریکانو (دبل)", "price": 149000 },
+      { "name": "آیس موکا", "price": 151000 },
+      { "name": "آیس تونیک اسپرسو (دبل)", "price": 161000 }
+    ],
+    "Ice / Shake": [
+      { "name": "شیک شکلات", "price": 239000 },
+      { "name": "شیک نوتلا", "price": 259000 },
+      { "name": "شیک کارامل", "price": 239000 },
+      { "name": "شیک وانیل", "price": 239000 },
+      { "name": "شیک نوتلا و بادام‌زمینی", "price": 259000 },
+      { "name": "شیک پسته", "price": 319000 },
+      { "name": "شیک اوریو", "price": 239000 },
+      { "name": "شیک فندق", "price": 259000 }
+    ],
+    "Hookah": [
+      { "name": "دو سیب آلبالو" },
+      { "name": "شب‌های مسکو" },
+      { "name": "آدامس دارچین" },
+      { "name": "پرتقال خامه" },
+      { "name": "انبه" },
+      { "name": "لئو" }
+    ]
+  }
+}
+JSON;
 
-        DB::transaction(function () use ($menu) {
-            foreach ($menu as $categoryOrder => $categoryData) {
+        $secondMenuJson = <<<'JSON'
+{
+  "menu": {
+    "Salad": [
+      {
+        "name": "سالاد سزار سوخاری (۲ رول)",
+        "description": "کاهو، سینه مرغ سوخاری، پنیر پارمزان، کروتون، گوجه، کالبی، سس سزار",
+        "price": 399000
+      },
+      {
+        "name": "سالاد سزار سوخاری (۴ رول)",
+        "description": "کاهو، سینه مرغ سوخاری، پنیر پارمزان، کروتون، گوجه، کالبی، سس سزار",
+        "price": 539000
+      },
+      {
+        "name": "سالاد سزار گریل",
+        "description": "کاهو، سینه مرغ گریل شده، پنیر پارمزان، کروتون، گوجه، کالبی، سس سزار",
+        "price": 379000
+      },
+      {
+        "name": "سالاد میکس سبز",
+        "description": "کاهو، کلم، خیار، گوجه، هویج، ذرت، زیتون، فلفل دلمه، سس سبز",
+        "price": 320000
+      }
+    ],
+    "Plates": [
+      {
+        "name": "بشقاب سوخاری",
+        "description": "فیله مرغ سوخاری، پوره سیب‌زمینی، دیپ پنیر، سالاد",
+        "price": 499000
+      },
+      {
+        "name": "بشقاب گریل",
+        "description": "فیله مرغ گریل شده با سس مخصوص، سبزیجات گریل، سالاد",
+        "price": 529000
+      },
+      {
+        "name": "فودپارن",
+        "description": "ترکیب فیله مرغ گریل، سیب‌زمینی، سالاد و سس مخصوص",
+        "price": 529000
+      }
+    ],
+    "Starters": [
+      {
+        "name": "فرنج فرایز",
+        "description": "سیب‌زمینی سرخ‌شده ساده",
+        "price": 339000
+      },
+      {
+        "name": "فرنج فرایز مخصوص",
+        "description": "سیب‌زمینی سرخ‌شده با پنیر پیتزا و ژامبون",
+        "price": 299000
+      },
+      {
+        "name": "بال مرغ تندوری با سس آلفردو",
+        "description": "۶ عدد بال مرغ تند با سس آلفردو",
+        "price": 315000
+      },
+      {
+        "name": "بوفالو وینگز",
+        "description": "۵ عدد بال مرغ با سس بوفالو",
+        "price": 299000
+      }
+    ],
+    "Pizza": [
+      {
+        "name": "مرغ و پستو",
+        "description": "سس پستو، مرغ گریل، قارچ، فلفل دلمه، پنیر، سس خامه‌ای",
+        "price": 499000
+      },
+      {
+        "name": "کروچینو",
+        "description": "سس قرمز، گوشت چرخ‌کرده، پنیر، فلفل دلمه، قارچ، پیاز، زیتون",
+        "price": 489000
+      },
+      {
+        "name": "بیکن",
+        "description": "سس قرمز، بیکن گوشت، پنیر، فلفل دلمه، زیتون، قارچ",
+        "price": 521000
+      },
+      {
+        "name": "مارگاریتا",
+        "description": "سس قرمز، پنیر، گوجه تازه، ریحان",
+        "price": 539000
+      },
+      {
+        "name": "پپرونی",
+        "description": "سس قرمز، پپرونی، پنیر، زیتون، قارچ",
+        "price": 519000
+      }
+    ],
+    "Pasta": [
+      {
+        "name": "چیکن آلفردو",
+        "description": "پاستا با سس آلفردو و فیله مرغ گریل‌شده",
+        "price": 389000
+      },
+      {
+        "name": "بیف آلفردو",
+        "description": "پاستا با سس آلفردو و گوشت گوساله",
+        "price": 449000
+      },
+      {
+        "name": "چیکن پستو",
+        "description": "پاستا با سس پستو و مرغ گریل‌شده",
+        "price": 415000
+      },
+      {
+        "name": "بیف پستو",
+        "description": "پاستا با سس پستو و گوشت گوساله",
+        "price": 459000
+      },
+      {
+        "name": "مک اند چیز",
+        "description": "پاستا با سس پنیر و ژامبون",
+        "price": 349000
+      }
+    ],
+    "Burger": [
+      {
+        "name": "کلاسیک برگر",
+        "description": "۱۵۰ گرم گوشت گوساله، کاهو، گوجه، خیارشور، سس مخصوص",
+        "price": 339000
+      },
+      {
+        "name": "چیز برگر",
+        "description": "۱۵۰ گرم گوشت گوساله، پنیر چدار، کاهو، گوجه، سس مخصوص",
+        "price": 359000
+      },
+      {
+        "name": "مشروم برگر",
+        "description": "۱۵۰ گرم گوشت گوساله، قارچ، پنیر چدار، سس مخصوص",
+        "price": 369000
+      },
+      {
+        "name": "بیکن برگر",
+        "description": "۱۵۰ گرم گوشت گوساله، بیکن، پنیر چدار، سس مخصوص",
+        "price": 399000
+      }
+    ],
+    "Panini": [
+      {
+        "name": "پانینی مرغ پستو",
+        "description": "مرغ گریل‌شده، سس پستو، نان ساندویچی",
+        "price": 399000
+      },
+      {
+        "name": "پانینی چیز استیک",
+        "description": "استیک گوساله، فلفل دلمه، پیاز، پنیر چدار",
+        "price": 411000
+      },
+      {
+        "name": "پانینی بیکن",
+        "description": "بیکن گوشت، پنیر چدار، سس مخصوص، نان تست",
+        "price": 399000
+      },
+      {
+        "name": "پانینی ژامبون",
+        "description": "ژامبون مرغ و پنیر گودا، نان تست",
+        "price": 299000
+      }
+    ],
+    "Hotdog": [
+      {
+        "name": "هات‌داگ کلاسیک",
+        "description": "هات‌داگ گوشت، کاهو، گوجه، خیارشور، نان",
+        "price": 339000
+      },
+      {
+        "name": "هات‌داگ کروچینو",
+        "description": "هات‌داگ گوشت، سس قارچ، فلفل دلمه، پنیر پیتزا",
+        "price": 359000
+      },
+      {
+        "name": "هات‌داگ بیکن",
+        "description": "هات‌داگ گوشت و بیکن، پنیر چدار، نان تست",
+        "price": 289000
+      }
+    ]
+  }
+}
+JSON;
+
+        $menus = [];
+        foreach ([$firstMenuJson, $secondMenuJson] as $menuJson) {
+            $decoded = json_decode($menuJson, true, 512, JSON_THROW_ON_ERROR);
+            foreach ($decoded['menu'] as $categoryName => $items) {
+                $menus[] = [
+                    'name' => $categoryName,
+                    'items' => $items,
+                ];
+            }
+        }
+
+        DB::transaction(function () use ($menus) {
+            foreach ($menus as $categoryOrder => $categoryData) {
+                $categorySlug = Str::slug($categoryData['name']);
+                if (blank($categorySlug)) {
+                    $categorySlug = Str::slug('category-' . $categoryOrder . '-' . Str::random(6));
+                }
+
                 $category = Category::updateOrCreate(
-                    ['slug' => Str::slug($categoryData['name'])],
+                    ['slug' => $categorySlug],
                     [
                         'name' => $categoryData['name'],
-                        'description' => $categoryData['description'],
-                        'hero_image_url' => $categoryData['hero_image_url'],
+                        'description' => null,
+                        'hero_image_url' => null,
                         'is_active' => true,
                         'display_order' => $categoryOrder,
                     ],
                 );
 
                 foreach ($categoryData['items'] as $itemOrder => $itemData) {
-                    $slug = Str::slug($itemData['name'] . '-' . $category->id);
+                    $slugBase = Str::slug($itemData['name'] . '-' . $category->id);
+                    if (blank($slugBase)) {
+                        $slugBase = Str::slug($category->slug . '-' . $itemOrder . '-' . Str::random(6));
+                    }
 
                     MenuItem::updateOrCreate(
-                        ['slug' => $slug],
+                        ['slug' => $slugBase],
                         [
                             'category_id' => $category->id,
                             'name' => $itemData['name'],
                             'subtitle' => $itemData['subtitle'] ?? null,
                             'description' => $itemData['description'] ?? null,
-                            'price' => $itemData['price'],
+                            'price' => $itemData['price'] ?? 0,
                             'currency' => $itemData['currency'] ?? 'تومان',
                             'is_available' => $itemData['is_available'] ?? true,
                             'is_featured' => $itemData['is_featured'] ?? false,
