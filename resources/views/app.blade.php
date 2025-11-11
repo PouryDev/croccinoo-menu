@@ -8,6 +8,9 @@
 
         <!-- Scripts -->
         @routes
+        <script>
+            window.APP_URL = "{{ rtrim(config('app.url'), '/') }}";
+        </script>
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead

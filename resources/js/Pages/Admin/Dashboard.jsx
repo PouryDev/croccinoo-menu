@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import { withAppUrl } from '@/utils/appUrl';
 
 export default function Dashboard({ auth, stats = {}, recentUpdates = [] }) {
     const statCards = [
@@ -65,7 +66,7 @@ export default function Dashboard({ auth, stats = {}, recentUpdates = [] }) {
                             </p>
                         </div>
                         <Link
-                            href={route('admin.menu.index', undefined, false)}
+                            href={withAppUrl('/admin/menu')}
                             className="inline-flex items-center gap-2 rounded-full bg-cocoa-900 px-4 py-2 text-sm font-semibold text-latte-50 shadow-menu-card transition hover:bg-cocoa-800"
                         >
                             مدیریت منو

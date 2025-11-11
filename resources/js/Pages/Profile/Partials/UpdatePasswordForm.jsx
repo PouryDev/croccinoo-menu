@@ -5,6 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
+import { withAppUrl } from '@/utils/appUrl';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
@@ -27,7 +28,7 @@ export default function UpdatePasswordForm({ className = '' }) {
     const updatePassword = (e) => {
         e.preventDefault();
 
-        put(route('password.update', undefined, false), {
+        put(withAppUrl('/password'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {

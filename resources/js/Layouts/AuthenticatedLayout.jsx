@@ -4,9 +4,12 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { withAppUrl } from '@/utils/appUrl';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const user = usePage().props.auth.user;
+    const page = usePage();
+    const user = page.props.auth.user;
+    const currentUrl = page.url || '';
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
@@ -24,14 +27,14 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden items-center gap-6 sm:flex">
                                 <NavLink
-                                    href={route('admin.dashboard', undefined, false)}
-                                    active={route().current('admin.dashboard')}
+                                    href={withAppUrl('/admin')}
+                                    active={currentUrl === '/admin'}
                                 >
                                     داشبورد
                                 </NavLink>
                                 <NavLink
-                                    href={route('admin.menu.index', undefined, false)}
-                                    active={route().current('admin.menu.index')}
+                                    href={withAppUrl('/admin/menu')}
+                                    active={currentUrl.startsWith('/admin/menu')}
                                 >
                                     مدیریت منو
                                 </NavLink>
@@ -60,10 +63,10 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit', undefined, false)}>
+                                <Dropdown.Link href={withAppUrl('/profile')}>
                                             پروفایل
                                         </Dropdown.Link>
-                                        <Dropdown.Link href={route('logout', undefined, false)} method="post" as="button">
+                                <Dropdown.Link href={withAppUrl('/logout')} method="post" as="button">
                                             خروج
                                         </Dropdown.Link>
                                     </Dropdown.Content>
@@ -100,14 +103,14 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            href={route('admin.dashboard', undefined, false)}
-                            active={route().current('admin.dashboard')}
+                            href={withAppUrl('/admin')}
+                            active={currentUrl === '/admin'}
                         >
                             داشبورد
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href={route('admin.menu.index', undefined, false)}
-                            active={route().current('admin.menu.index')}
+                            href={withAppUrl('/admin/menu')}
+                            active={currentUrl.startsWith('/admin/menu')}
                         >
                             مدیریت منو
                         </ResponsiveNavLink>
@@ -120,10 +123,10 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit', undefined, false)}>
+                            <ResponsiveNavLink href={withAppUrl('/profile')}>
                                 پروفایل
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout', undefined, false)} as="button">
+                            <ResponsiveNavLink method="post" href={withAppUrl('/logout')} as="button">
                                 خروج
                             </ResponsiveNavLink>
                         </div>

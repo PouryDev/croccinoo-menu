@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, router } from '@inertiajs/react';
 import { useEffect, useMemo, useState } from 'react';
+import { withAppUrl } from '@/utils/appUrl';
 
 const initialCategoryForm = {
     name: '',
@@ -93,7 +94,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
 
     const handleCreateCategory = (event) => {
         event.preventDefault();
-        categoryForm.post(route('admin.categories.store', undefined, false), {
+        categoryForm.post(withAppUrl('/admin/categories'), {
             preserveScroll: true,
             onSuccess: () => {
                 categoryForm.reset();
@@ -105,7 +106,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
         event.preventDefault();
         if (!editingCategory) return;
 
-        categoryEditForm.put(route('admin.categories.update', editingCategory.id, false), {
+        categoryEditForm.put(withAppUrl(`/admin/categories/${editingCategory.id}`), {
             preserveScroll: true,
             onSuccess: () => {
                 setEditingCategory(null);
@@ -123,7 +124,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
             .filter(Boolean);
 
         itemForm.setData('tags', tags);
-        itemForm.post(route('admin.items.store', selectedCategory.id, false), {
+        itemForm.post(withAppUrl(`/admin/categories/${selectedCategory.id}/items`), {
             preserveScroll: true,
             onSuccess: () => {
                 itemForm.reset();
@@ -142,7 +143,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
             .filter(Boolean);
 
         itemEditForm.setData('tags', tags);
-        itemEditForm.put(route('admin.items.update', editingItem.id, false), {
+        itemEditForm.put(withAppUrl(`/admin/items/${editingItem.id}`), {
             preserveScroll: true,
             onSuccess: () => {
                 setEditingItem(null);
@@ -152,7 +153,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
     };
 
     const toggleAvailability = (item) => {
-        router.patch(route('admin.items.toggle', item.id, false), undefined, {
+        router.patch(withAppUrl(`/admin/items/${item.id}/toggle`), undefined, {
             preserveScroll: true,
         });
     };
@@ -163,7 +164,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
                 `حذف "${category.name}" تمام آیتم‌های مرتبط را هم حذف می‌کند. آیا مطمئن هستید؟`,
             )
         ) {
-            router.delete(route('admin.categories.destroy', category.id, false), {
+            router.delete(withAppUrl(`/admin/categories/${category.id}`), {
                 preserveScroll: true,
                 onSuccess: () => {
                     if (selectedCategoryId === category.id) {
@@ -176,7 +177,7 @@ export default function MenuIndex({ auth, categories = [], stats = {}, activeCat
 
     const deleteItem = (item) => {
         if (confirm(`"${item.name}" حذف شود؟`)) {
-            router.delete(route('admin.items.destroy', item.id, false), {
+            router.delete(withAppUrl(`/admin/items/${item.id}`), {
                 preserveScroll: true,
             });
         }
