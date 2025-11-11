@@ -43,7 +43,7 @@ services:
       - croccinoo_app_code:/var/www/croccinoo-menu:ro
       - croccinoo_storage:/var/www/croccinoo-menu/storage
       - croccinoo_bootstrap:/var/www/croccinoo-menu/bootstrap/cache
-      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /var/www/croccinoo-menu/docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       - croccinoo_net
 
