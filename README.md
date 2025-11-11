@@ -1,59 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Croccinoo](https://img.shields.io/badge/Croccinoo-Latte%20%26%20Foam-bd8e60?style=for-the-badge)
 
-## About Laravel
+# Croccinoo Menu & Admin Panel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+مدیریت منوی کافه کروچینو با وایب کروسان و کاپوچینو ☕🥐
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ معرفی
 
-## Learning Laravel
+این پروژه یک استک کامل **Laravel + Inertia + React + Tailwind** برای کافه Croccinoo است:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+-   پنل ادمین برای مدیریت دسته‌بندی‌ها و آیتم‌های منو با رابط کاربری شیشه‌ای و تعامل‌پذیر
+-   منوی عمومی موبایل-فرست با انیمیشن‌های Framer Motion و تم کره‌ای-فومی
+-   API عمومی برای استفاده در اپلیکیشن‌ها یا اسکرین‌های دیجیتال کافه
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🧱 تکنولوژی‌ها
 
-## Laravel Sponsors
+-   Laravel 11 + Breeze (React stack)
+-   Inertia.js و React 18
+-   TailwindCSS با تم اختصاصی Croccinoo
+-   Framer Motion برای انیمیشن‌های بخش عمومی
+-   PHPUnit برای تست‌های فیچر
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ⚙️ راه‌اندازی سریع
 
-### Premium Partners
+```bash
+cp .env.example .env
+composer install
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# دیتابیس را تنظیم و سپس
+php artisan migrate --seed
 
-## Contributing
+# فرانت‌اند
+pnpm install
+pnpm run dev   # یا pnpm run build برای خروجی production
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> کانکشن دیتابیس را در `.env` تنظیم کنید. برای محیط لوکال می‌توانید از SQLite استفاده کنید.
 
-## Code of Conduct
+## 🚢 استقرار با Docker
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+پروژه همراه با Dockerfile و docker-compose آمادهٔ استقرار است و از تصاویر زیرساخت زیر استفاده می‌کند:
 
-## Security Vulnerabilities
+-   `php:8.3-fpm` برای اجرای برنامه
+-   `nginx:1.27-alpine` روی پورت 8080
+-   `mariadb:11.4` روی پورت 3307 (برای جلوگیری از تداخل با سایر دیتابیس‌ها)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### مراحل راه‌اندازی
 
-## License
+1. یک فایل محیطی مخصوص داکر بسازید و مقادیر لازم را تنظیم کنید:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    ```bash
+    cp .env.example .env.docker
+    # مقادیر APP_KEY، DB_* و سایر متغیرها را متناسب با سرور پر کنید
+    ```
+
+2. کانتینرها را بالا بیاورید (اولین اجرا شامل build است):
+
+    ```bash
+    docker compose --env-file .env.docker up -d --build
+    ```
+
+3. کلید APP را داخل کانتینر ست کنید و مهاجرت‌ها را اجرا کنید:
+
+    ```bash
+    docker compose exec app php artisan key:generate --force
+    docker compose exec app php artisan migrate --force --seed
+    docker compose exec app php artisan storage:link
+    ```
+
+### نکات زیرساختی
+
+-   دیتابیس روی نام ولوم `croccinoo_db_data` ذخیره می‌شود و با `docker compose down` پاک نمی‌شود (مگر اینکه `-v` بزنید).
+-   فایل‌های آپلودی و cache در ولوم‌های `croccinoo_storage` و `croccinoo_bootstrap` نگه‌داری می‌شوند و هنگام به‌روزرسانی کانتینر محفوظ می‌مانند.
+-   وب‌سرور روی پورت 8080 در دسترس است؛ در صورت نیاز برای سرور production، این پورت را در compose تغییر دهید یا پشت reverse proxy قرار دهید.
+-   برای اعمال نسخه‌ی جدید کد بدون از دست رفتن داده:
+    ```bash
+    git pull
+    docker compose --env-file .env.docker build app
+    docker compose --env-file .env.docker up -d app nginx
+    ```
+    دیتابیس و فایل‌ها حفظ می‌شوند.
+
+## 🔐 دسترسی پنل ادمین
+
+پس از اجرای seeder، یک کاربر ادمین ساخته می‌شود:
+
+-   **Email:** `admin@croccinoo.test`
+-   **Password:** `password`
+
+مسیر ورود: `/login`  
+پس از ورود، داشبورد در `/admin` در دسترس است.
+
+## 📱 منوی عمومی
+
+-   مسیر نمایش منو: `/menu`
+-   داده‌ها از دسته‌بندی و آیتم‌های فعال بارگذاری می‌شوند
+-   CTA تماس تلفنی و برچسب‌های ویژه Croccinoo
+
+### API عمومی
+
+```
+GET /api/menu
+```
+
+-   خروجی شامل دسته‌بندی‌ها، آیتم‌های دردسترس و متادیتای بروزرسانی است.
+-   پارامتر `preview=1` دسته‌ها و آیتم‌های غیرفعال را نیز برمی‌گرداند (برای حالت پیش‌نمایش ادمین).
+
+## 🧪 تست‌ها
+
+```bash
+php artisan test
+```
+
+تست‌های فیچر موارد زیر را پوشش می‌دهند:
+
+-   کنترل دسترسی مهمان‌ها به مسیرهای ادمین
+-   CRUD دسته‌بندی و آیتم منو
+-   تغییر وضعیت سرو آیتم‌ها
+
+## 🗂️ ساختار کلیدی
+
+-   `app/Models` — مدل‌های `Category` و `MenuItem` با روابط و soft delete
+-   `app/Http/Controllers/Admin` — کنترلرهای پنل مدیریت و منطق CRUD
+-   `app/Http/Resources` — ری‌سورس‌های API منو
+-   `resources/js/Pages/Admin` — صفحات Inertia برای داشبورد و مدیریت منو
+-   `resources/js/Pages/Menu` — منوی موبایلی با Framer Motion
+-   `database/seeders/MenuSeeder.php` — داده‌های نمونه Croccinoo
+
+## 🛠️ توسعه
+
+-   تم و رنگ‌ها در `tailwind.config.js` و `resources/css/app.css` قابل تنظیم هستند.
+-   انیمیشن‌ها در `resources/js/Pages/Menu/Index.jsx` پیاده‌سازی شده‌اند.
+-   برای افزودن اکشن‌های بیشتر (مثلاً آپلود تصویر) می‌توانید از ساختار `MenuItemController` الگو بگیرید.
+
+---
+
+Made with love, butter, and microfoam by the Croccinoo crew.

@@ -1,11 +1,90 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;900&family=Playfair+Display:wght@500;600;700&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+    color-scheme: light;
+}
+
+body {
+    @apply font-sans bg-latte-50 text-cocoa-900 antialiased;
+
+    background-image:
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0)),
+        linear-gradient(140deg, #f8f4ef 0%, #f8e7d3 45%, #d2aa78 100%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+    direction: rtl;
+    text-align: right;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top right, rgba(94, 132, 179, 0.08), transparent 55%);
+    mix-blend-mode: soft-light;
+}
+
+@layer base {
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-display text-cocoa-900 tracking-tight;
+    }
+
+    h1 {
+        @apply text-4xl sm:text-5xl;
+    }
+
+    h2 {
+        @apply text-3xl sm:text-4xl;
+    }
+
+    h3 {
+        @apply text-2xl sm:text-3xl;
+    }
+
+    ::selection {
+        @apply bg-cocoa-500 text-latte-50;
+    }
+
+    input[type='search'] {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    input[type='search']::-webkit-search-cancel-button {
+        display: none;
+    }
+}
+
+@layer components {
+    .glass-panel {
+        @apply backdrop-blur-xl bg-white/60 border border-white/40 shadow-lg shadow-cocoa-900/10 rounded-3xl;
+    }
+
+    .menu-card {
+        @apply glass-panel shadow-menu-card transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-menu-card-hover;
+    }
+
+    .floating-tabbar {
+        @apply glass-panel flex items-center gap-2 px-3 py-2 text-sm font-medium;
+    }
+}
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
