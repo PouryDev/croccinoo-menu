@@ -42,22 +42,6 @@ RUN set -eux; \
 COPY docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Provide default .env for image-only usage
-RUN echo "APP_NAME=\"کروچینو\"" > .env && \
-    echo "APP_ENV=production" >> .env && \
-    echo "APP_KEY=" >> .env && \
-    echo "APP_DEBUG=false" >> .env && \
-    echo "APP_URL=https://croccinoo.ir" >> .env && \
-    echo "" >> .env && \
-    echo "DB_CONNECTION=mysql" >> .env && \
-    echo "DB_HOST=db" >> .env && \
-    echo "DB_PORT=3306" >> .env && \
-    echo "DB_DATABASE=croccinoo" >> .env && \
-    echo "DB_USERNAME=croccinoo" >> .env && \
-    echo "DB_PASSWORD=secret" >> .env && \
-    echo "LOG_CHANNEL=daily" >> .env && \
-    php artisan key:generate --no-interaction
-
 EXPOSE 9000
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
