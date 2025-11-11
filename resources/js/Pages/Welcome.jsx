@@ -39,7 +39,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </svg>
                             </div>
                             <nav className="-mx-3 flex flex-1 justify-end">
-                                <Link
+                                    <Link
                                     href={
                                         auth.user
                                             ? withAppUrl('/dashboard')
